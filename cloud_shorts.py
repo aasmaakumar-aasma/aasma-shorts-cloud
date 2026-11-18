@@ -42,8 +42,11 @@ for gk in [k.strip() for k in ENV["GEMINI_KEYS"].split(",") if k.strip()]:
     try:
         r = requests.post(f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key={gk}", json={"contents":[{"parts":[{"text":prompt}]}],"generationConfig":{"responseMimeType":"application/json"}}, timeout=60)
         if r.status_code == 200:
-            data = json.loads(r.json()["candidates"][0]["content"]["parts"][0]["text"]); break
-    except Exception: continue
+            raw = "".join(pt.get("text","") for pt in r.json()["candidates"][0]["content"]["parts"] if not pt.get("thought"))
+            m = re.search(r"\{.*\}", raw, re.S)
+            if m: data = json.loads(m.group(0)); break
+        else: print("Gemini ERR:", r.status_code, r.text[:200])
+    except Exception as ex: print("Ex:", ex); continue
 if not data: raise RuntimeError("All Gemini Keys failed")
 
 open("speak.js","w").write('const{MsEdgeTTS,OUTPUT_FORMAT}=require("msedge-tts"),fs=require("fs");(async()=>{const d=process.argv[2],t=process.argv[3],v=process.argv[4];fs.mkdirSync(d,{recursive:true});const s=new MsEdgeTTS();await s.setMetadata(v,OUTPUT_FORMAT.AUDIO_24KHZ_48KBITRATE_MONO_MP3);await s.toFile(d,t,{rate:"+4%"});})();')
@@ -108,5 +111,4 @@ bcfg["today_count"] += 1; bcfg["last_run_at"] = now.isoformat(); bcfg["last_stat
 json.dump(bcfg, open(BFILE, "w"), indent=2)
 subprocess.run(["git","config","user.name","AasmaBot"]); subprocess.run(["git","config","user.email","bot@aasma.local"])
 subprocess.run(["git","add",BFILE]); subprocess.run(["git","commit","-m","Update bot_config"]); subprocess.run(["git","push"])
-requests.post(f"https://api.telegram.org/bot{ENV['TG_TOKEN']}/sendMessage", json={"chat_id":"8990607208","text":f"✅ Done! [{subj}] {data['title']} ban gaya aur Telegram + Blogger par post ho gaya!"}, timeout=20)
-print("🎉 CLOUD RUN COMPLETE!") # ADMIN_ALERT_ADDED
+print("🎉 CLOUD RUN COMPLETE!")
