@@ -1,0 +1,15 @@
+{
+  "site_name": "Aasma Shorts",
+  "categories": [
+    "English",
+    "Hindi",
+    "Sanskrit"
+  ],
+  "ads": {
+    "enabled": false,
+    "banner": "",
+    "popunder": "",
+    "direct_link": ""
+  },
+  "hidden_posts": []
+}
