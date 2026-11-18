@@ -108,4 +108,5 @@ bcfg["today_count"] += 1; bcfg["last_run_at"] = now.isoformat(); bcfg["last_stat
 json.dump(bcfg, open(BFILE, "w"), indent=2)
 subprocess.run(["git","config","user.name","AasmaBot"]); subprocess.run(["git","config","user.email","bot@aasma.local"])
 subprocess.run(["git","add",BFILE]); subprocess.run(["git","commit","-m","Update bot_config"]); subprocess.run(["git","push"])
-print("🎉 CLOUD RUN COMPLETE!")
+requests.post(f"https://api.telegram.org/bot{ENV['TG_TOKEN']}/sendMessage", json={"chat_id":"8990607208","text":f"✅ Done! [{subj}] {data['title']} ban gaya aur Telegram + Blogger par post ho gaya!"}, timeout=20)
+print("🎉 CLOUD RUN COMPLETE!") # ADMIN_ALERT_ADDED
