@@ -5,5 +5,20 @@
   "last_status": "OK: Sangya in 60s: Hindi Grammar Made Easy",
   "today_date": "2026-11-19",
   "today_count": 2,
-  "last_run_at": "2026-11-19T10:34:50.038822"
+  "last_run_at": "2026-11-19T10:34:50.038822",
+  "auto_enabled": true,
+  "slots": [
+    {
+      "hour": 6,
+      "subject": "English"
+    },
+    {
+      "hour": 12,
+      "subject": "Hindi"
+    },
+    {
+      "hour": 18,
+      "subject": "Sanskrit"
+    }
+  ]
 }
