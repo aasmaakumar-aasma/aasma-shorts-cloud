@@ -1,9 +1,9 @@
 {
   "daily_limit": 4,
   "interval_hours": 6,
-  "lesson_idx": 1,
-  "last_status": "OK: Master Nouns in 60s! Part 1",
+  "lesson_idx": 2,
+  "last_status": "OK: Sangya in 60s: Hindi Grammar Made Easy",
   "today_date": "2026-11-19",
-  "today_count": 1,
-  "last_run_at": "2026-11-19T04:29:33.366417"
+  "today_count": 2,
+  "last_run_at": "2026-11-19T10:34:50.038822"
 }
