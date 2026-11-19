@@ -4,14 +4,15 @@
     "English",
     "Hindi",
     "Sanskrit",
-    "Maths",
-    "Math"
+    "Maths"
   ],
   "ads": {
     "enabled": false,
     "banner": "",
     "popunder": "",
-    "direct_link": ""
+    "direct_link": "",
+    "personal_ads": [],
+    "video_vast": ""
   },
   "hidden_posts": [
     "4583307630453282477"
