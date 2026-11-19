@@ -1,22 +1,13 @@
 name: Auto Shorts Cloud
 on:
-  schedule:
-    - cron: '30 */3 * * *'
   workflow_dispatch:
     inputs:
-      topic:
-        description: 'Custom Topic'
-        required: false
-        default: ''
-      subject:
-        description: 'Subject'
-        required: false
-        default: ''
+      topic: { description: 'Custom Topic', required: false, default: '' }
+      subject: { description: 'Subject', required: false, default: '' }
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    permissions: { contents: write }
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
