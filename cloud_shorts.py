@@ -1,3 +1,12 @@
+
+def get_yt_id(query):
+    try:
+        import subprocess
+        out = subprocess.check_output(["yt-dlp", f"ytsearch1:{query} class 9", "--get-id", "--no-warnings"], timeout=15).decode().strip()
+        return out.splitlines()[0] if out else ""
+    except Exception:
+        return ""
+
 import os, re, json, time, html, base64, hashlib, shutil, subprocess, smtplib, ssl, datetime, requests
 from concurrent.futures import ThreadPoolExecutor
 from edu_pdf import build_pdf
@@ -101,7 +110,7 @@ Exactly 10 questions, ans must be integer 0, 1, 2, or 3."""
 
     hw = " | ".join(n.get("homework",[]))
     qz = json.dumps(test_10, ensure_ascii=False)
-    b_html = f'<div class="edu-meta" data-subject="{subj}" data-video="{html.escape(stream_url)}" data-tg-post="aasma_shorts_study/{tg_v["result"]["message_id"]}" data-pdf="{html.escape(pdf_tg)}" data-thumb="{html.escape(thumb_url)}" data-summary="{html.escape(n["summary"])}" data-homework="{html.escape(hw)}" data-quiz="{html.escape(qz)}"></div><p>{html.escape(n["summary"])}</p>'
+    b_html = f'<div class="edu-meta" data-subject="{subj}" data-video="{html.escape(stream_url)}" data-tg-post="aasma_shorts_study/{tg_v["result"]["message_id"]}" data-yt="{get_yt_id(title)}" data-pdf="{html.escape(pdf_tg)}" data-thumb="{html.escape(thumb_url)}" data-summary="{html.escape(n["summary"])}" data-homework="{html.escape(hw)}" data-quiz="{html.escape(qz)}"></div><p>{html.escape(n["summary"])}</p>'
     msg = MIMEMultipart("alternative"); msg["Subject"] = data["title"]; msg["From"] = ENV["GMAIL"]; msg["To"] = ENV["BLOGGER_EMAIL"]
     msg.attach(MIMEText(b_html, "html"))
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl.create_default_context()) as s:
