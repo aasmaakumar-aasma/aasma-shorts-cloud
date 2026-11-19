@@ -1,33 +1,50 @@
-name: Auto Shorts Cloud
+name: Aasma Auto Shorts Cloud
 on:
   workflow_dispatch:
     inputs:
-      topic: { description: 'Custom Topic', required: false, default: '' }
-      subject: { description: 'Subject', required: false, default: '' }
+      subject:
+        description: 'Subject name'
+        required: false
+        default: 'English'
+      topic_override:
+        description: 'Optional exact topic'
+        required: false
+        default: ''
+
 jobs:
-  build:
+  build_and_publish:
     runs-on: ubuntu-latest
-    permissions: { contents: write }
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with: { python-version: '3.11' }
-      - uses: actions/setup-node@v4
-        with: { node-version: '20' }
-      - run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-noto-core && pip install requests fpdf2 && npm install msedge-tts
-      - env:
-          GEMINI_KEYS: ${{ secrets.GEMINI_KEYS }}
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-noto-core fonts-noto-extra
+          pip install -q fpdf2 uharfbuzz Pillow requests yt-dlp
+          npm install -g msedge-tts
+      - name: Run Cloud Shorts Generator
+        env:
+          GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHANNEL: ${{ secrets.TG_CHANNEL }}
+          ADMIN_CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
-          CLOUD_API_KEY: ${{ secrets.CLOUD_API_KEY }}
-          CLOUD_API_SECRET: ${{ secrets.CLOUD_API_SECRET }}
-          GMAIL: ${{ secrets.GMAIL }}
-          APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
+          CLD_CLOUD_NAME: ${{ secrets.CLD_CLOUD_NAME }}
+          CLD_API_KEY: ${{ secrets.CLD_API_KEY }}
+          CLD_API_SECRET: ${{ secrets.CLD_API_SECRET }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
           BLOGGER_EMAIL: ${{ secrets.BLOGGER_EMAIL }}
-          BLOG_URL: ${{ secrets.BLOG_URL }}
-          CUSTOM_TOPIC: ${{ github.event.inputs.topic }}
-          CUSTOM_SUBJ: ${{ github.event.inputs.subject }}
-          TRIGGER_EVENT: ${{ github.event_name }}
-        run: python -u cloud_shorts.py
+          GH_TOKEN_PAT: ${{ secrets.GH_PAT || github.token }}
+          SUBJECT: ${{ github.event.inputs.subject || 'English' }}
+          TOPIC_OVERRIDE: ${{ github.event.inputs.topic_override || '' }}
+        run: python cloud_shorts.py
