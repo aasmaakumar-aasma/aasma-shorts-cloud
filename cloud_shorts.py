@@ -1,3 +1,5 @@
+import subprocess
+subprocess.run(['pip', 'install', '-q', 'uharfbuzz', 'yt-dlp'], check=False)
 
 def get_yt_id(query):
     try:
