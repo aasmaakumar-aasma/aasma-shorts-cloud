@@ -1,3 +1,23 @@
+
+def upload_github_release(file_path, asset_name):
+    try:
+        tok = os.environ.get("GH_TOKEN_PAT", "")
+        if not tok: return ""
+        hdr = {"Authorization": f"token {tok}", "Accept": "application/vnd.github.v3+json", "User-Agent": "AasmaRel"}
+        rel_api = "https://api.github.com/repos/aasmaakumar-aasma/aasma-shorts-cloud/releases"
+        r = requests.get(f"{rel_api}/tags/videos-v1", headers=hdr)
+        if r.status_code != 200:
+            r = requests.post(rel_api, headers=hdr, json={"tag_name": "videos-v1", "name": "Aasma Shorts Videos"})
+        rel = r.json()
+        up_url = rel["upload_url"].split("{")[0] + f"?name={asset_name}"
+        with open(file_path, "rb") as f:
+            u = requests.post(up_url, headers={**hdr, "Content-Type": "video/mp4"}, data=f.read(), timeout=120)
+        if u.status_code in (200, 201):
+            return u.json().get("browser_download_url", "")
+    except Exception:
+        pass
+    return ""
+
 import subprocess
 subprocess.run(['pip', 'install', '-q', 'uharfbuzz', 'yt-dlp'], check=False)
 
