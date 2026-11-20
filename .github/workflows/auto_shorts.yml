@@ -39,9 +39,13 @@ jobs:
           ADMIN_CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          CLD_CLOUD_NAME: ${{ secrets.CLD_CLOUD_NAME }}
-          CLD_API_KEY: ${{ secrets.CLD_API_KEY }}
-          CLD_API_SECRET: ${{ secrets.CLD_API_SECRET }}
+          CLD_CLOUD_NAME: ${{ secrets.CLOUD_NAME || secrets.CLD_CLOUD_NAME }}
+          CLD_API_KEY: ${{ secrets.CLOUD_API_KEY || secrets.CLD_API_KEY }}
+          CLD_API_SECRET: ${{ secrets.CLOUD_API_SECRET || secrets.CLD_API_SECRET }}
+          CLOUD_NAME: ${{ secrets.CLOUD_NAME || secrets.CLD_CLOUD_NAME }}
+          CLOUD_API_KEY: ${{ secrets.CLOUD_API_KEY || secrets.CLD_API_KEY }}
+          CLOUD_API_SECRET: ${{ secrets.CLOUD_API_SECRET || secrets.CLD_API_SECRET }}
+          GMAIL_PASS: ${{ secrets.GMAIL_APP_PASS || secrets.GMAIL_PASS }}
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
           BLOGGER_EMAIL: ${{ secrets.BLOGGER_EMAIL }}
