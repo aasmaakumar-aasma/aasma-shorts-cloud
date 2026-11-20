@@ -84,3 +84,14 @@ def make_edu_pdf(data, out_path="notes.pdf"):
     pdf.cell(pdf.epw, 8, "Aasma Shorts Study  |  Telegram: @aasma_shorts_study", align="C")
     pdf.output(out_path)
     return out_path
+
+
+def build_pdf(*args, **kwargs):
+    data = {}
+    out_path = kwargs.get("out_path", "notes.pdf")
+    for a in args:
+        if isinstance(a, dict):
+            data = a
+        elif isinstance(a, str) and a.endswith(".pdf"):
+            out_path = a
+    return make_edu_pdf(data, out_path)
