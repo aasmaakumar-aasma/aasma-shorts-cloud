@@ -25,14 +25,6 @@
   "chat_history": [
     {
       "role": "user",
-      "text": "API ki Main isko add karna hai Gemini ka API ki hai"
-    },
-    {
-      "role": "model",
-      "text": "हाँ Amit, मैं सुन रहा हूँ! बताओ क्या करना है?"
-    },
-    {
-      "role": "user",
       "text": "Abe Main chahta Hun ise pyar ki ko add kar do Gemini API mein Taki jab bhi kam ho to iska use ho AIzaSyDPUnHsgEJU12ZTHv92tN_R25nlFsnhTn0"
     },
     {
@@ -46,6 +38,14 @@
     {
       "role": "model",
       "text": "नमस्ते अमित,\n\nमुझे लगता है कि आप फिर से वही API key दे रहे हैं: `AIzaSyDPUnHsgEJU12ZTHv92tN_R25nlFsnhTn0`।\n\nजैसा कि मैंने पहले बताया, मैं एक AI असिस्टेंट हूँ और मेरे पास ऐसा कोई तरीका नहीं है कि मैं इस API key को स्टोर कर सकूँ या इसे अपने सिस्टम में जोड़ सकूँ। यह सुरक्षित कारणों से संभव नहीं है।\n\nक्या आपके पास कोई और काम है जो मैं कर सकता हूँ? जैसे कोई नया टॉपिक जोड़ना, विज्ञापन चालू/बंद करना या व"
+    },
+    {
+      "role": "user",
+      "text": "लास्ट वीडियो कब और कौन सा है"
+    },
+    {
+      "role": "model",
+      "text": "आपका आखिरी वीडियो आज, 20 नवंबर 2026 को दोपहर 12:48:21 UTC पर पूरा हुआ था। हालांकि, यह वीडियो रन **फेल** हो गया था।\n\nमुझे यह जानकारी नहीं है कि वह वीडियो किस विषय या टॉपिक पर था, क्योंकि सिस्टम में यह जानकारी रिकॉर्ड नहीं होती।"
     }
   ]
 }
