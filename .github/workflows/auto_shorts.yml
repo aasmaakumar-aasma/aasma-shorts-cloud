@@ -33,6 +33,7 @@ jobs:
       - name: Run Cloud Shorts Generator
         env:
           GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
+          GEMINI_KEYS: ${{ secrets.GEMINI_KEYS || secrets.GEMINI_KEY }}
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
           TG_CHANNEL: ${{ secrets.TG_CHANNEL }}
           ADMIN_CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
