@@ -21,5 +21,15 @@
       "subject": "Sanskrit"
     }
   ],
-  "topics": {}
+  "topics": {},
+  "chat_history": [
+    {
+      "role": "user",
+      "text": "API wala setting kaha hai"
+    },
+    {
+      "role": "model",
+      "text": "Amit, hello! 😊\n\nAPI वाला सेटिंग मुझे सीधे तौर पर यहाँ नहीं दिख रहा है। क्या तुम किसी खास चीज़ के लिए API सेटिंग ढूंढ रहे हो, जैसे वीडियो अपलोड करना, या कुछ और? मुझे बताओ ताकि मैं तुम्हारी मदद कर सकूँ!"
+    }
+  ]
 }
